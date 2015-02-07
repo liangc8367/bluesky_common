@@ -27,8 +27,10 @@ public class UDPService extends Thread{
     static public class Configuration {
         /* local addr & port */
         public InetSocketAddress addrLocal; // a port of 0 implies any available port
-
+        public InetSocketAddress addrRemote;
         /* thread name, priority */
+
+        public boolean clientMode; // true for client mode,
     }
 
     /** Completion handler */
@@ -50,21 +52,29 @@ public class UDPService extends Thread{
     }
 
     public boolean startService(){
-        mRunning = true;
-        try{
-            start();
-        } catch (IllegalThreadStateException e){
-            mLogger.w(TAG, "UDP Service has already started");
-            mRunning = false;
+        if(!mRunning) {
+            mRunning = true;
+            try {
+                start();
+            } catch (IllegalThreadStateException e) {
+                mLogger.w(TAG, "UDP Service has already started");
+                mRunning = false;
+                return false;
+            }
+            return true;
+        } else {
             return false;
         }
-        return true;
     }
 
     public boolean stopService(){
-        mRunning = false;
-        //TODO: send interrupt
-        return true;
+        if(mRunning) {
+            mRunning = false;
+            mSocket.close();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean send(DatagramPacket packet){
@@ -110,8 +120,14 @@ public class UDPService extends Thread{
             return;
         }
 
+        if(mConfig.clientMode){
+            if(!connect()){
+                return;
+            }
+        }
+
         int count = 0;
-        System.out.println("udp receiving...");
+        mLogger.i(TAG, "udp receiving...");
         while(mRunning){
 
             byte[]          rxedBuffer = new byte[MAX_UDP_PACKET_LENGTH];
@@ -148,17 +164,34 @@ public class UDPService extends Thread{
      */
     private boolean bind(){
         try {
-            mLogger.w(TAG, "to bind:" + mConfig.addrLocal);
+            mLogger.i(TAG, "to bind:" + mConfig.addrLocal);
             mSocket = new DatagramSocket(mConfig.addrLocal); // create and bind
         }catch ( Exception e ){
             mLogger.w(TAG, "failed to bind:" + e);
             mSocket = null;
             return false;
         }
+        mLogger.i(TAG, "bound local: " + mSocket.getLocalAddress() + ":" + mSocket.getLocalPort());
         mBound = true;
         return true;
     }
 
+    /** bind and connect udp socket per configuration
+     *
+     * @return true if success, else false
+     */
+    private boolean connect(){
+        try {
+            mSocket.connect(mConfig.addrRemote);
+        }catch ( Exception e ){
+            mLogger.e(TAG, "failed to connect:" + e);
+            mSocket.close();
+            mSocket = null;
+            return false;
+        }
+        mLogger.i(TAG, "connected remote:" + mSocket.getInetAddress() + ":" + mSocket.getPort());
+        return true;
+    }
 
 
 

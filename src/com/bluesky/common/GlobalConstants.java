@@ -5,6 +5,7 @@ package com.bluesky.common;
  */
 public class GlobalConstants {
     final static String TAG = "TrunkManager";
+    public static final String TRUNK_CENTER_ADDR = "127.0.0.1"; // on same machine
     public static final int TRUNK_CENTER_PORT   = 32000;
     public static final int INIT_SEQ_NUMBER     = 12345;
 
