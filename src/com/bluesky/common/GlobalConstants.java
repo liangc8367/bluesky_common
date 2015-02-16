@@ -9,13 +9,13 @@ public class GlobalConstants {
     public static final int TRUNK_CENTER_PORT   = 32000;
     public static final int INIT_SEQ_NUMBER     = 12345;
 
-    public static final int REGISTRATION_RETRY_TIME = 1000; // 1 second
-    public static final int REGISTRATION_RETRY_MAX_TIME = 60 * 5 * 1000; // 5 minutes
+    public static final long REGISTRATION_RETRY_TIME = 1000; // 1 second
+    public static final long REGISTRATION_RETRY_MAX_TIME = 60 * 5 * 1000; // 5 minutes
 
     /** call parameters */
-    public static final int CALL_FLYWHEEL_PERIOD    = 1500;  // return to idle if no rxed packet
-    public static final int CALL_HANG_PERIOD        = 5000; // 5second call hang
-    public static final int CALL_PACKET_INTERVAL    = 20;    // 20ms
+    public static final long CALL_FLYWHEEL_PERIOD    = 1500;  // return to idle if no rxed packet
+    public static final long CALL_HANG_PERIOD        = 5000; // 5second call hang
+    public static final long CALL_PACKET_INTERVAL    = 20;    // 20ms
     public static final int CALL_PREAMBLE_NUMBER    = 3;
     public static final int CALL_TERM_NUMBER        = -3;
 

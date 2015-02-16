@@ -204,6 +204,6 @@ public class UDPService extends Thread{
 
     private OLog mLogger;
 
-    private final static String TAG = ":UDPSvc:";
+    private final static String TAG = "UDPSvc";
     private final static int MAX_UDP_PACKET_LENGTH = 1000; //TODO: to make it even smaller
 }

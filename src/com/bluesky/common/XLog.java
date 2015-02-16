@@ -2,6 +2,7 @@ package com.bluesky.common;
 
 import com.bluesky.common.OLog;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -10,7 +11,7 @@ import java.util.logging.Logger;
 public class XLog implements OLog {
 
     public XLog(){
-
+        LOGGER.setLevel(Level.ALL);
     }
 
     @Override
