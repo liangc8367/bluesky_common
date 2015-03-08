@@ -11,6 +11,6 @@ public class CallInformation {
 
     public short mSequence;
     public long mTargetId;
-    public long mSuid;
+    public long mSourceId;
     public short       mAudioSeq;
 }
