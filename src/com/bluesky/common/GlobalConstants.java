@@ -13,9 +13,11 @@ public class GlobalConstants {
     public static final long REGISTRATION_RETRY_MAX_TIME = 60 * 5 * 1000; // 5 minutes
 
     /** call parameters */
-    public static final long CALL_FLYWHEEL_PERIOD    = 1500;  // return to idle if no rxed packet
-    public static final long CALL_HANG_PERIOD        = 5000; // 5second call hang
+    public static final long MAX_ROUND_TRIP_TIME    = 60; // assume 60ms max round trip time
+    public static final long CALL_FLYWHEEL_PERIOD    = MAX_ROUND_TRIP_TIME * 20;  // return to idle if no rxed packet
+    public static final long CALL_HANG_PERIOD_MS        = 5000; // 5second call hang
     public static final long CALL_PACKET_INTERVAL    = 20;    // 20ms
+    public static final short CALL_HANG_COUNTDOWN   = (short)(CALL_HANG_PERIOD_MS / CALL_PACKET_INTERVAL);
     public static final int CALL_PREAMBLE_NUMBER    = 3;
     public static final int CALL_TERM_NUMBER        = -3;
 
@@ -23,6 +25,6 @@ public class GlobalConstants {
 
     /** call info for faked echo */
     public static final long    SUID_TRUNK_MANAGER  = 1;
-
+    public static final long    SUID_INVALID = 0;
 
 }
