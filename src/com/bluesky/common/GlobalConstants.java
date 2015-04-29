@@ -13,7 +13,7 @@ public class GlobalConstants {
     public static final long REGISTRATION_RETRY_MAX_TIME = 60 * 5 * 1000; // 5 minutes
 
     /** call parameters */
-    public static final long MAX_ROUND_TRIP_TIME    = 100; //amazon ec2 free-tier has 80ms RTT time
+    public static final long MAX_ROUND_TRIP_TIME    = 150; //amazon ec2 free-tier has 80ms RTT time
     public static final long CALL_FLYWHEEL_PERIOD    = MAX_ROUND_TRIP_TIME * 20;  // return to idle if no rxed packet
     public static final long CALL_HANG_PERIOD_MS        = 5000; // 5second call hang
     public static final long CALL_PACKET_INTERVAL    = 20;    // 20ms
