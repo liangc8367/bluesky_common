@@ -4,8 +4,25 @@ package com.bluesky.common.user_management;
  * Created by liangc on 16/05/15.
  */
 public interface UserManagementService {
-    public GroupInfo[] getGroupsInfo(long gid);
-    public UserInfo[] getGroupMembersInfo(long gid);
+    /** get info of all groups
+     *
+     * @return GroupInfo, if error, then id == -1 and intro is the reason
+     */
+    public GroupInfo[] listGroup();
+
+    /** get group members
+     *
+     * @param gid
+     * @return array of members, empty for empty group or error
+     */
+    public UserInfo[] getGroupMembers(long gid);
+
+    /** get groups that the uid belongs to
+     *
+     * @param uid
+     * @return
+     */
+    public GroupInfo[] getMyGroups(long uid);
 
     /** sign up user
      *
